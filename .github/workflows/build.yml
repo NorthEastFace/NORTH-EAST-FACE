@@ -20,7 +20,7 @@ jobs:
         # test against latest update of each major Java version, as well as specific updates of LTS versions:
         java: [17, 21]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
