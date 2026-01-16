@@ -20,56 +20,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; }
-        .hero { position: relative; height: 78vh; min-height: 520px; color: white; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #1a1a1a; background: #fff; }
+        .hero { position: relative; height: 85vh; min-height: 520px; color: white; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 3px solid #c4122f; }
         .hero-carousel { position: absolute; inset: 0; }
-        .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease-in-out; }
+        .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center top; opacity: 0; transition: opacity 0.8s ease-in-out; }
         .hero-slide.is-active { opacity: 1; }
-        .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35)); }
+        .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(196,18,47,0.35), rgba(196,18,47,0.15)); }
         .hero-content { position: relative; z-index: 1; padding: 0 1.5rem; }
         .hero-content h1 { font-size: 3.8rem; font-weight: 700; margin-bottom: 0.8rem; letter-spacing: 0.01em; text-shadow: 2px 2px 8px rgba(0,0,0,0.55); text-transform: uppercase; }
         .hero-content .hero-sub { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 1rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.45); }
         .hero-content .hero-meta { display: inline-flex; gap: 10px; align-items: center; font-size: 1.25rem; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 0.4rem; text-shadow: 1px 1px 6px rgba(0,0,0,0.5); }
         .hero-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events: none; padding: 0 18px; z-index: 2; }
-        .hero-nav button { pointer-events: all; background: rgba(0,0,0,0.35); color: #fff; border: 1px solid rgba(255,255,255,0.35); border-radius: 50%; width: 44px; height: 44px; font-size: 20px; cursor: pointer; transition: background 0.2s, transform 0.2s; }
-        .hero-nav button:hover { background: rgba(0,0,0,0.55); transform: translateY(-2px); }
+        .hero-nav button { pointer-events: all; background: rgba(0,0,0,0.4); color: #fff; border: 2px solid #fff; border-radius: 50%; width: 48px; height: 48px; font-size: 20px; cursor: pointer; transition: background 0.2s, transform 0.2s; font-weight: 700; }
+        .hero-nav button:hover { background: rgba(0,0,0,0.6); transform: scale(1.1); }
         .hero-nav button:focus { outline: 2px solid #fff; outline-offset: 2px; }
         .hero-dots { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 2; }
-        .hero-dots button { width: 11px; height: 11px; border-radius: 50%; border: 1px solid #fff; background: rgba(255,255,255,0.4); cursor: pointer; transition: background 0.2s, transform 0.2s; }
-        .hero-dots button.is-active { background: #fff; transform: scale(1.05); }
-        .new-arrivals { padding: 4rem 0; background: #fff; overflow: hidden; }
+        .hero-dots button { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; background: rgba(255,255,255,0.4); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+        .hero-dots button.is-active { background: #fff; border-color: #fff; transform: scale(1.15); }
+        .new-arrivals { padding: 4rem 0; background: #fafafa; overflow: hidden; border-top: 1px solid #f0f0f0; }
         .new-arrivals-header { text-align: center; margin-bottom: 2.5rem; }
-        .new-arrivals-header h2 { font-size: 2.8rem; margin-bottom: 0.5rem; font-weight: 700; }
-        .new-arrivals-header h2 .new-text { color: #e53935; }
-        .new-arrivals-header p { color: #666; font-size: 1rem; letter-spacing: 0.02em; }
+        .new-arrivals-header h2 { font-size: 2.8rem; margin-bottom: 0.5rem; font-weight: 700; color: #1a1a1a; }
+        .new-arrivals-header h2 .new-text { color: #c4122f; }
+        .new-arrivals-header p { color: #555; font-size: 1rem; letter-spacing: 0.02em; }
         .products-slider { position: relative; max-width: 1200px; margin: 0 auto; }
         .products-track-container { overflow: hidden; width: 100%; }
         .products-track { display: flex; gap: 20px; will-change: transform; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; cursor: grab; }
         .products-track:active { cursor: grabbing; }
-        /* Ensure anchor wrapper doesn't add link styling */
         .products-track a { text-decoration: none; color: inherit; display: block; }
-        /* Keep original card width by sizing the flex item (anchor) */
         .products-track .product-link { flex: 0 0 280px; }
-        /* Make inner card fill the anchor width */
-        .product-card { width: 100%; }
-        .product-card { flex: 0 0 280px; background: #fff; border: 1px solid #e0e0e0; border-radius: 4px; overflow: hidden; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
-        .product-card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
-        .product-image { width: 100%; height: 280px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .product-card { width: 100%; background: #fff; border: 2px solid #e8e8e8; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+        .product-card:hover { transform: translateY(-6px); box-shadow: 0 8px 24px rgba(196,18,47,0.15); border-color: #c4122f; }
+        .product-image { width: 100%; height: 280px; background: #fafafa; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         .product-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
         .product-badge { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; }
-        .badge { background: #000; color: #fff; padding: 4px 8px; font-size: 0.7rem; font-weight: 600; border-radius: 2px; text-transform: uppercase; }
+        .badge { background: #c4122f; color: #fff; padding: 5px 10px; font-size: 0.7rem; font-weight: 700; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
         .product-info { padding: 1.2rem; }
-        .product-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.8rem; line-height: 1.3; min-height: 2.6em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .product-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.8rem; line-height: 1.3; min-height: 2.6em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: #1a1a1a; }
         .product-price { display: flex; align-items: center; gap: 8px; }
-        .discount-rate { color: #e53935; font-weight: 700; font-size: 1rem; }
-        .sale-price { font-size: 1.05rem; font-weight: 700; }
+        .discount-rate { color: #c4122f; font-weight: 800; font-size: 1rem; }
+        .sale-price { font-size: 1.05rem; font-weight: 700; color: #1a1a1a; }
         .original-price { color: #999; text-decoration: line-through; font-size: 0.9rem; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .footer { background: #000; color: white; padding: 3rem 0 1rem; }
+        .footer { background: #1a1a1a; color: white; padding: 3rem 0 1rem; border-top: 3px solid #c4122f; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        .footer-section h4 { margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-section h4 { margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; color: #c4122f; }
         .footer-section ul { list-style: none; line-height: 1.8; color: #ccc; }
-        .footer-bottom { text-align: center; color: #777; font-size: 0.9rem; }
+        .footer-bottom { text-align: center; color: #888; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -77,10 +73,11 @@
 
     <section class="hero">
         <div class="hero-carousel" id="heroCarousel">
-            <div class="hero-slide is-active" style="background-image: url('${pageContext.request.contextPath}/static/images/carousel/banner1.webp');"></div>
-            <div class="hero-slide" style="background-image: url('${pageContext.request.contextPath}/static/images/carousel/banner2.webp');"></div>
-            <div class="hero-slide" style="background-image: url('${pageContext.request.contextPath}/static/images/carousel/banner3.webp');"></div>
-            <div class="hero-slide" style="background-image: url('${pageContext.request.contextPath}/static/images/carousel/banner4.webp');"></div>
+            <div class="hero-slide is-active" style="background-image: url('${pageContext.request.contextPath}/static/images/carousel/v2_banner1.webp');"></div>
+            <div class="hero-slide" style="background-image: url('${pageContext.request.contextPath}/static/images/carousel/v2_banner2.webp');"></div>
+            <div class="hero-slide" style="background-image: url('${pageContext.request.contextPath}/static/images/carousel/v2_banner3.webp');"></div>
+            <div class="hero-slide" style="background-image: url('${pageContext.request.contextPath}/static/images/carousel/v2_banner4.webp');"></div>
+            <div class="hero-slide" style="background-image: url('${pageContext.request.contextPath}/static/images/carousel/v2_banner5.webp');"></div>
         </div>
         <div class="hero-nav" aria-hidden="true">
             <button type="button" id="heroPrev" aria-label="Previous banner">‹</button>

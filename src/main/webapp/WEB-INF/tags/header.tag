@@ -2,27 +2,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- Shared header tag --%>
 <style>
-    .global-header { position: sticky; top: 0; z-index: 1000; background: #fff; border-bottom: 1px solid #eee; }
+    .global-header { position: sticky; top: 0; z-index: 1000; background: #c4122f; border-bottom: 2px solid #a00f26; }
     .header-inner { max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 22px; }
     .logo-link { display: inline-flex; align-items: center; text-decoration: none; }
     .logo-link img { display: block; height: 44px; width: auto; }
-    .icon-button { background: none; border: none; font-size: 24px; line-height: 1; cursor: pointer; color: #111; padding: 6px 4px; }
-    .icon-button:focus { outline: 2px solid #000; outline-offset: 2px; }
+    .icon-button { background: none; border: none; font-size: 24px; line-height: 1; cursor: pointer; color: #fff; padding: 6px 4px; }
+    .icon-button:focus { outline: 2px solid #fff; outline-offset: 2px; }
     .main-nav { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .main-nav a { text-decoration: none; color: #111; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
-    .main-nav a:hover { color: #444; }
+    .main-nav a { text-decoration: none; color: #fff; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+    .main-nav a:hover { color: #ffe6e6; }
     .header-spacer { flex: 1; }
     .header-right { display: flex; align-items: center; gap: 14px; }
     .search-box { display: flex; align-items: center; gap: 8px; border: 1px solid #d0d0d0; border-radius: 8px; padding: 8px 10px; min-width: 200px; }
     .search-box input { border: none; outline: none; font-size: 14px; width: 100%; }
     .search-box .search-icon { font-size: 18px; color: #333; }
     .cart-link { position: relative; }
-    .cart-badge { position: absolute; top: -4px; right: -6px; background: #111; color: #fff; border-radius: 999px; min-width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; padding: 0 5px; border: 2px solid #fff; }
+    .cart-badge { position: absolute; top: -4px; right: -6px; background: #fff; color: #c4122f; border-radius: 999px; min-width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; padding: 0 5px; border: 2px solid #c4122f; font-weight: 700; }
     
     /* User menu */
     .header-right { position: relative; }
-    .user-menu { position: relative; text-decoration: none; font-weight: 400; }
-    .user-menu:hover { color: #666; }
+    .user-menu { position: relative; text-decoration: none; font-weight: 400; color: #fff; }
+    .user-menu:hover { color: #ffe6e6; }
     .user-menu strong { font-weight: 600; }
     .user-dropdown { position: absolute; right: 0; }
 
@@ -58,7 +58,7 @@
 <header class="global-header">
     <div class="header-inner">
         <a class="logo-link" href="${pageContext.request.contextPath}/">
-            <img src="https://d29tuqwuufoa2l.cloudfront.net/logo.png" alt="NORTH EAST FACE"/>
+            <img src="https://d29tuqwuufoa2l.cloudfront.net/logo-white.png" alt="NORTH EAST FACE"/>
         </a>
         <button class="icon-button" aria-label="Toggle menu">☰</button>
         <nav class="main-nav" aria-label="Primary">
